@@ -46,7 +46,7 @@ export const checkEmail = (email) => {
 */
 export const calculateArea = (figure, number1, number2 = 0) => {
   if (!figure || !isSupportedFigure(figure)) {
-    return `${figure} is not supported`;
+    return '${figure} is not supported';
   }
   if (!isNumber(number1) || !isNumber(number2)) {
     return 'number1 and number2 should be numbers';
@@ -136,7 +136,7 @@ export const sortArrayOfObjectsByKey = (array, key) => {
     return 'The second param should be an string';
   }
   if (!arrayElementsAreObjectWithKey(array, key)) {
-    return `Some elements in the array does not have the ${key} property`;
+    return 'Some elements in the array does not have the ${key} property';
   }
   return sortArrayByKey(array, key);
 }
