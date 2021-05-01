@@ -22,7 +22,7 @@ import {
 */
 export const checkEmail = (email) => {
   if (!email || !isString(email)) {
-    return 'The email should be an string';
+    return 'The email should be a string';
   }
   const isValidEmail = validateEmail(email);
   if (!isValidEmail) {
@@ -158,7 +158,7 @@ export const numberOfOddAndEvenNumbers = (array) => {
   }
   const elementsAreNumbers = array.every(isNumber);
   if (!elementsAreNumbers) {
-    return `The array should have only numbers`;
+    return 'The array should have only numbers';
   }
   return {
     odd: getOddNumbersFromArray(array).length,
