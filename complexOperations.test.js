@@ -21,7 +21,7 @@ describe('complexOperation - Unit Tests', () => {
   });
     describe('calculateArea', () => {
     it('testing a non-supported figure', () => {
-      expect(complexOperations.calculateArea('prism')).toBe('${figure} is not supported')
+      expect(complexOperations.calculateArea('prism', 3,5)).toBe('${figure} is not supported')
     });
     it('providing invalid imputs for number1 and number2', () => {
       expect(complexOperations.calculateArea('rectangle', '', 'undefined')).toBe('number1 and number2 should be numbers')
@@ -77,32 +77,12 @@ describe('complexOperation - Unit Tests', () => {
     it('Second param is not a string', () => {
       expect(complexOperations.sortArrayOfObjectsByKey([1,3,5,7],(222))).toBe('The second param should be an string')
     });
-    it('sorting by name', () => {
-      let name = ['Peter', 'John', 'Rose'];
-      let age = 'they are in their twenties';
-      expect(complexOperations.sortArrayOfObjectsByKey([name], age)).toBe('Some elements in the array does not have the ${key} property')
+    it('elements with no key property', () => {
+      expect(complexOperations.sortArrayOfObjectsByKey([{nationality: 'Spanish'}, {nationality:'Argentinian'}, {nationality: ''}], 'Age')).toBe('Some elements in the array does not have the ${key} property')
     });
-    it('sorting by name', () => {
-      let expectedArray = [
-        {name: 'Peter'},
-        {name: 'Rose'}
-      ];
-      let array = [
-        {name: 'Rose'},
-        {name: 'Peter'}
-      ];
-      expect(complexOperations.sortArrayOfObjectsByKey(array, 'name')).toStrictEqual(expectedArray)
-    });
-    it('sorting by age', () => {
-      let expectedArray = [
-        {age: '25'},
-        {age: '28'}
-      ];
-      let array = [
-        {age: '28'},
-        {age: '25'}
-      ];
-      expect(complexOperations.sortArrayOfObjectsByKey(array, 'age')).toStrictEqual(expectedArray)
+      it('sorting by age', () => {
+      expect(complexOperations.sortArrayOfObjectsByKey([{name: 'Rose', age: '25'}, {name:'Peter', age: '50'}], 'age')).toEqual([{name: 'Rose', age: '25'}, {name:'Peter', age: '50'}])
+      expect(complexOperations.sortArrayOfObjectsByKey([{name: 'Peter', age: '42'}, {name:'Lenna', age: '30'}], 'age')).toEqual([{age: '30', name: 'Lenna'}, {age:'42', name: 'Peter'}])
     });
   });
   describe('numberOfOddAndEvenNumbers', () => {
