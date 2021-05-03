@@ -11,6 +11,7 @@ describe('Mocked complexOperation', () => {
       jest.spyOn(basicOperations, 'isString').mockReturnValue(false);
       jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(false);
       expect(complexOperations.checkEmail(6,8,'F')).toStrictEqual('The email should be a string');
+      expect(complexOperations.checkEmail()).toStrictEqual('The email should be a string');
       expect('isString').toBeCalled;
       expect('validateEmail').toBeCalled;
     });
@@ -18,29 +19,23 @@ describe('Mocked complexOperation', () => {
       jest.spyOn(basicOperations, 'isString').mockReturnValue(false);
       jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(false);
       expect(complexOperations.checkEmail()).toStrictEqual('The email should be a string');
-      expect('isString').toBeCalled;
-      expect('validateEmail').toBeCalled;
     });
-    it('providing a string and not a valid email', () => {
-      let mockedIsString = jest.spyOn(basicOperations, 'isString').mockReturnValue(true);
-      jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(false);
-      expect(complexOperations.checkEmail('melisabellico')).toBe('The email is invalid');
-      expect('isString').toBeCalled;
-      expect('validateEmail').toBeCalled;
+    it('mocked to be true (valid), when providing a string and not a valid email', () => {
+      jest.spyOn(basicOperations, 'isString').mockReturnValue(true);
+      jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(true);
+      expect(complexOperations.checkEmail('melisabellico')).toBe('The email is valid');
     });
-    it('providing an invalid email', () => {
-      let mockedIsString = jest.spyOn(basicOperations, 'isString').mockReturnValue(true);
+    it('The email is invalid', () => {
+      jest.spyOn(basicOperations, 'isString').mockReturnValue(true);
       jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(false);
       expect(complexOperations.checkEmail('@')).toBe('The email is invalid');
-      expect('isString').toBeCalled;
-      expect('validateEmail').toBeCalled;
+      expect(complexOperations.checkEmail('melisabellico@gmail.com')).toBe('The email is invalid');
     });
-    it('Providing a valid input', () => {
-      let mockedIsString = jest.spyOn(basicOperations, 'isString').mockReturnValue(true);
+    it('The email is valid', () => {
+      jest.spyOn(basicOperations, 'isString').mockReturnValue(true);
       jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(true);
       expect(complexOperations.checkEmail('melisabellico@gmail.com')).toBe('The email is valid');
-      expect('isString').toBeCalled;
-      expect('validateEmail').toBeCalled;
+      expect(complexOperations.checkEmail('undefined')).toBe('The email is valid');
     });
   });
     describe('calculateArea', () => {
@@ -50,15 +45,16 @@ describe('Mocked complexOperation', () => {
     it('testing a non-supported figure', () => {
       jest.spyOn(basicOperations, 'isSupportedFigure').mockReturnValue(false);
       expect(complexOperations.calculateArea('prism')).toBe('${figure} is not supported')
-      expect('isSupportedFigure').toBeCalled;
+      expect(complexOperations.calculateArea('prism', 3,5)).toBe('${figure} is not supported')
+      expect(complexOperations.calculateArea('',3,2)).toBe('${figure} is not supported')
+      expect(complexOperations.calculateArea('undefined')).toBe('${figure} is not supported')
+      expect(complexOperations.calculateArea('${figure}', 2, 3)).toBe('${figure} is not supported')
     });
     it('providing invalid imputs for number1 and number2', () => {
       jest.spyOn(basicOperations, 'isSupportedFigure').mockReturnValue(true);
       jest.spyOn(basicOperations, 'isNumber').mockReturnValue(false);
       expect(complexOperations.calculateArea('rectangle', '', 'undefined')).toBe('number1 and number2 should be numbers')
       expect(complexOperations.calculateArea('rectangle', 'nine', 'nine')).toBe('number1 and number2 should be numbers')
-      expect('isSupportedFigure').toBeCalled;
-      expect('isNumber').toBeCalled;
     });
     it('providing valid imputs for number1 and number2, with mocked values', () => {
       jest.spyOn(basicOperations, 'isSupportedFigure').mockReturnValue(true);
