@@ -1,4 +1,4 @@
-# "Become a QA Automation - week-13"
+# "Become a QA Automation - Week-13"
 
 ## What is the Project about?
 * Creating integrations tests;
