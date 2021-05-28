@@ -5,7 +5,7 @@
 * Mocked tests for the same funtions tested with the integrations tests.
 
 ## Author: 
-Melisa D. Bellico 
+[Melisa D. Bellico](https://www.linkedin.com/in/melisabellico/)
 
 ## Technology stack 
 * [Node.js](https://nodejs.org/es/docs/) 
